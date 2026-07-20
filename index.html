@@ -4,122 +4,184 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Input Box Format</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      width: 350px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
 </head>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
 
-  .container {
-    background: white;
-    padding: 25px;
-    width: 350px;
-    border-radius: 10px;
-  }
-
-  h2 {
-    text-align: center;
-    color: #333;
-  }
-
-  label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-</style>
+<body>
 
 <div class="container">
-  <h2>User Information </h2>
+  <h2>User Information</h2>
 
- <form >
-  
+  <form>
+
     <label>Name:</label>
-    <input type="text"  id= "name"placeholder="Enter your name">
+    <input type="text" id="name" placeholder="Enter your name">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>Age:</label>
     <input type="number" id="age" placeholder="Enter your age">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>Email:</label>
     <input type="email" id="email" placeholder="Enter your email">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>User ID:</label>
     <input type="text" id="user-id" placeholder="Enter your user ID">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>Password:</label>
     <input type="password" id="password" placeholder="Enter your password">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>Date of Birth:</label>
-    <input type="date" id="dob" placeholder="Enter your date of birth">
+    <input type="date" id="dob">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>Phone Number:</label>
     <input type="tel" id="phone" placeholder="Enter your phone number">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <label>Address:</label>
     <input type="text" id="address" placeholder="Enter your address">
+    <span class="error" style="display:none;">* This field is required.</span>
 
     <button type="submit">Submit</button>
 
   </form>
 </div>
+
 <script>
-document.querySelector('form').addEventListener('submit', function(event) {
+document.querySelector("form").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    let name = document.getElementById('name').value.trim();
-    let age = document.getElementById('age').value.trim();
-    let email = document.getElementById('email').value.trim();
-    let userId = document.getElementById('user-id').value.trim();
-    let password = document.getElementById('password').value.trim();
-    let dob = document.getElementById('dob').value.trim();
-    let phone = document.getElementById('phone').value.trim();
-    let address = document.getElementById('address').value.trim();
+    document.querySelectorAll(".error").forEach(error => error.remove());
 
-  
-    let missingFields = [];
+    let isValid = true;
 
-    if (!name) missingFields.push("Name");
-    if (!age) missingFields.push("Age");
-    if (!email) missingFields.push("Email");
-    if (!userId) missingFields.push("User ID");
-    if (!password) missingFields.push("Password");
-    if (!dob) missingFields.push("Date of Birth");
-    if (!phone) missingFields.push("Phone Number");
-    if (!address) missingFields.push("Address");
+    function showError(id) {
+        let input = document.getElementById(id);
 
-    if (missingFields.length > 0) {
-      alert("Required fields are:\n\n" + missingFields.join("\n"));
-      return;
+        let error = document.createElement("spangi");
+        error.className = "error";
+        error.textContent = "* This field is required.";
+
+        input.insertAdjacentElement("afterend", error);
+    }
+
+    let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let userId = document.getElementById("user-id").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let dob = document.getElementById("dob").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let address = document.getElementById("address").value.trim();
+
+    if (!name) {
+        showError("name");
+        isValid = false;
+    }
+
+    if (!age) {
+        showError("age");
+        isValid = false;
+    }
+
+    if (!email) {
+        showError("email");
+        isValid = false;
+    }
+
+    if (!userId) {
+        showError("user-id");
+        isValid = false;
+    }
+
+    if (!password) {
+        showError("password");
+        isValid = false;
+    }
+
+    if (!dob) {
+        showError("dob");
+        isValid = false;
+    }
+
+    if (!phone) {
+        showError("phone");
+        isValid = false;
+    }
+
+    if (!address) {
+        showError("address");
+        isValid = false;
+    }
+
+    if (!isValid) {
+        return;
     }
 
     alert(
@@ -135,5 +197,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
     );
 });
 </script>
+
 </body>
 </html>
