@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Box Format</title>
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
 
+  .container {
+    background: white;
+    padding: 25px;
+    width: 350px;
+    border-radius: 10px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="container">
+  <h2>User Information </h2>
+
+ <form >
+  
+    <label>Name:</label>
+    <input type="text"  id= "name"placeholder="Enter your name">
+
+    <label>Age:</label>
+    <input type="number" id="age" placeholder="Enter your age">
+
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="Enter your email">
+
+    <label>User ID:</label>
+    <input type="text" id="user-id" placeholder="Enter your user ID">
+
+    <label>Password:</label>
+    <input type="password" id="password" placeholder="Enter your password">
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dob" placeholder="Enter your date of birth">
+
+    <label>Phone Number:</label>
+    <input type="tel" id="phone" placeholder="Enter your phone number">
+
+    <label>Address:</label>
+    <input type="text" id="address" placeholder="Enter your address">
+
+    <button type="submit">Submit</button>
+
+  </form>
+</div>
+<script>
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let name = document.getElementById('name').value.trim();
+    let age = document.getElementById('age').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let userId = document.getElementById('user-id').value.trim();
+    let password = document.getElementById('password').value.trim();
+    let dob = document.getElementById('dob').value.trim();
+    let phone = document.getElementById('phone').value.trim();
+    let address = document.getElementById('address').value.trim();
+
+  
+    let missingFields = [];
+
+    if (!name) missingFields.push("Name");
+    if (!age) missingFields.push("Age");
+    if (!email) missingFields.push("Email");
+    if (!userId) missingFields.push("User ID");
+    if (!password) missingFields.push("Password");
+    if (!dob) missingFields.push("Date of Birth");
+    if (!phone) missingFields.push("Phone Number");
+    if (!address) missingFields.push("Address");
+
+    if (missingFields.length > 0) {
+      alert("Required fields are:\n\n" + missingFields.join("\n"));
+      return;
+    }
+
+    alert(
+        "Form submitted successfully!\n\n" +
+        "Name: " + name + "\n" +
+        "Age: " + age + "\n" +
+        "Email: " + email + "\n" +
+        "User ID: " + userId + "\n" +
+        "Password: " + password + "\n" +
+        "Date of Birth: " + dob + "\n" +
+        "Phone Number: " + phone + "\n" +
+        "Address: " + address
+    );
+});
+</script>
+</body>
+</html>
